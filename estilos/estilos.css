@@ -1,0 +1,58 @@
+body{
+    margin: 0;
+    background-image: url("../Imagenes/fondo.jpg");
+    background-size: cover;
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto ;
+}
+
+.logo{
+    max-width: 50px;
+}
+
+.imagenDino{
+    height: auto;
+}
+
+.imagen_lista{
+    max-width: 600px;
+}
+
+.home{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.cuadro_inicio{
+    width: 70%;
+    height: 500px;
+    background-image: url("../Imagenes/fondo_inicio.jpg");
+    background-size: cover;
+}
+
+.container_card{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.descripcion{
+    border-top: 2px solid rgb(205, 205, 205);
+    background-color: rgb(255, 255, 255);
+    width: auto;
+    overflow: hidden;
+    word-wrap: break-word;
+    padding: 10px;
+}
+
+.footer{
+    margin-top: auto !important;
+    width: auto;
+    padding: 25px;
+    text-align: center;
+
+}
+
