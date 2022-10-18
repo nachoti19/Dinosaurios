@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 require_once './app/model/dinosaurios.model.php';
 require_once './app/view/dinosaurios.view.php';
 require_once './app/model/habitat.model.php';
@@ -11,6 +11,7 @@ class dinoController{
     private $view;
     private $habitat_model;
     private $habitatView;
+    private $helper;
 
     public function __construct()
     {
@@ -18,25 +19,29 @@ class dinoController{
         $this->view = new dinoView();
         $this->habitat_model = new habitatModel();
         $this->habitatView = new habitatView();
+        $this->helper = new AuthHelper();
     }
     //vistas de paginas
     public function showHome(){
+        $this->helper->IsLoggedIn();
         $this->view->mostrarHome();
     }
 
     public function showForm(){
-
+        $this->helper->checkLoggedIn();
         $habitat = $this->habitat_model->getHabitat();
         $this->view->mostrarFormulario($habitat);
     }
 
     public function showDinos(){
+        $this->helper->IsLoggedIn();
         $dinos = $this->model->getDinos();
         $habitat = $this->habitat_model->getHabitat();
         $this->view->mostrarDinos($dinos, $habitat);
     }
 
     public function showFormEditDino($id){
+        $this->helper->checkLoggedIn();
         $habitat = $this->habitat_model->getHabitat();
         $habitatDino = $this->habitat_model->getHabitatDino($id);
         $dinos = $this->model->selectDinoEdit($id);
@@ -51,6 +56,7 @@ class dinoController{
 
     //DINOSAURIOS
     function addDino(){
+        $this->helper->checkLoggedIn();
         $nombre = $_POST['nombre_dino'];
         $altura = $_POST['altura_dino'];
         $peso = $_POST['peso_dino'];
@@ -71,6 +77,7 @@ class dinoController{
     }
 
     function edit_dino($id){
+        $this->helper->checkLoggedIn();
         $nombre = $_POST['nombre_dino'];
         $altura = $_POST['altura_dino'];
         $peso = $_POST['peso_dino'];
@@ -85,6 +92,7 @@ class dinoController{
     }
 
     function DeleteDino($id){
+        $this->helper->checkLoggedIn();
         $this->model->DeleteDinos($id);
         header("Location: " . BASE_URL . "dinosaurios");
     }

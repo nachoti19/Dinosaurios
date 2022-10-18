@@ -12,86 +12,89 @@ if (!empty($_GET['action'])){
 
 $params = explode('/', $action);
 
-$dinocontroller = new dinoController();
-$habitatcontroller = new habitatController();
-$authcontroller = new authController();
-$authHelper = new AuthHelper();
-
 switch ($params[0]){
     //paginas
     case 'login';
+    $authcontroller = new AuthController();
         $authcontroller->showFormLogin();
     break;
     case 'home';
+    $dinocontroller = new dinoController();
         $dinocontroller->showHome();
         break;
     case 'dinosaurios';
+    $dinocontroller = new dinoController();
         $dinocontroller->showDinos();
         break;
     case 'agregardinos';
-        $authHelper->checkLoggedIn();
+        $dinocontroller = new dinoController();
         $dinocontroller->showForm();
         break;
     case 'agregarhabitat';
-        $authHelper->checkLoggedIn();
+    $habitatcontroller = new habitatController();
         $habitatcontroller->showFormHab();
         break;
     case 'editardinos';
-        $authHelper->checkLoggedIn();
+    $dinocontroller = new dinoController();
         $id = $params[1];
         $dinocontroller->showFormEditDino($id);
         break;
     case 'habitats';
+    $habitatcontroller = new habitatController();
         $habitatcontroller->showHabitats();
         break;
     case 'editarhabitat';
-        $authHelper->checkLoggedIn();
+    $habitatcontroller = new habitatController();
     $id = $params[1];
         $habitatcontroller->showHabitatsEdit($id);
         break;
     case 'vermas';
+    $dinocontroller = new dinoController();
     $id = $params[1];
         $dinocontroller->showMore($id);
         break;
     case 'listadinos';
+    $habitatcontroller = new habitatController();
     $id = $params[1];
         $habitatcontroller->showListDinos($id);
         break;
     //acciones->DINOS
     case 'adddino';
-        $authHelper->checkLoggedIn();
+    $dinocontroller = new dinoController();
         $dinocontroller->addDino();
         break;
     case 'editdino';
-        $authHelper->checkLoggedIn();
+    $dinocontroller = new dinoController();
         $id = $params[1];
         $dinocontroller->edit_dino($id);
         break;
     case 'delete';
-    $authHelper->checkLoggedIn();
+    $dinocontroller = new dinoController();
         $id = $params[1];
         $dinocontroller->DeleteDino($id);
         break;
     //acciones->HABITATS
     case 'addhabitat';
-        $authHelper->checkLoggedIn();
+    $habitatcontroller = new habitatController();
         $habitatcontroller->addHab();
         break;
     case 'edithabitat';
-        $authHelper->checkLoggedIn();
+    $habitatcontroller = new habitatController();
         $id = $params[1];
         $habitatcontroller->edit_habitat($id);
         break;
     case 'deletehab';
-        $authHelper->checkLoggedIn();
+    $habitatcontroller = new habitatController();
         $id = $params[1];
         $habitatcontroller->deleteHab($id);
         break;
     //acciones->USUARIO
     case 'validate';
+    $authcontroller = new AuthController();
         $authcontroller->validateUser();
         break;
     case 'logout';
+    $authcontroller = new AuthController();
         $authcontroller->logout();
         break;
     default:

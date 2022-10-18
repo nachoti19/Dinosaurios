@@ -1,5 +1,4 @@
 {include file="header.tpl"}
-
 <div class="home">
     <div class="cuadro_inicio">
     </div>

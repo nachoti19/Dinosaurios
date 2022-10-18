@@ -10,6 +10,7 @@ class habitatController{
     private $dinoView;
     private $habitatView;
     private $model;
+    private $helper;
 
     public function __construct()
     {
@@ -17,30 +18,36 @@ class habitatController{
         $this->view = new dinoView();
         $this->habitatView = new habitatView();
         $this->model = new dinoModel();
+        $this->helper = new AuthHelper();
     }
 
     //VISTAS
     public function showHabitats(){
+        $this->helper->IsLoggedIn();
         $habitat = $this->habitat_model->getHabitat();
         $this->habitatView->mostrarHabitat($habitat);
     }
 
     public function showFormHab(){
+        $this->helper->checkLoggedIn();
         $this->habitatView->mostrarFormularioHab();
     }
 
     function showHabitatsEdit($id){
+        $this->helper->checkLoggedIn();
         $habitat = $this->habitat_model->selectHabitatEdit($id);
         $this->habitatView->mostrarFormularioHabEdit($habitat);
     }
 
     function showListDinos($id){
+        $this->helper->IsLoggedIn();
         $habitat = $this->habitat_model->listDino($id);
         $this->habitatView->showListDino($habitat);
     }
 
     //ACCIONES
     function addHab(){
+        $this->helper->checkLoggedIn();
         $continente = $_POST['continente'];
         $bioma = $_POST['bioma'];
         $temperatura = $_POST['temperatura'];
@@ -51,6 +58,7 @@ class habitatController{
     }
 
     function edit_habitat($id){
+        $this->helper->checkLoggedIn();
         $continente = $_POST['continente'];
         $bioma = $_POST['bioma'];
         $temperatura = $_POST['temperatura'];
@@ -66,6 +74,7 @@ class habitatController{
     }
 
     function deleteHab($id){
+        $this->helper->checkLoggedIn();
         $habitatdino = $this->model->getDinoHab($id);
         if ($habitatdino){
             $this->allDinos("ERROR, no puede borrar un habitat teniendo dinosaurios en el, pobrecitos :c");
